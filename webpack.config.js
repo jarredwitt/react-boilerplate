@@ -1,12 +1,14 @@
 const webpack = require('webpack');
 const path = require('path');
+const values = require('postcss-modules-values');
+const localByDefault = require('postcss-modules-local-by-default');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = nodeEnv === 'production';
 
 module.exports = {
   devtool: isProd ? 'hidden-source-map' : 'cheap-eval-source-map',
-  context: path.join(__dirname, './client'),
+  context: path.join(__dirname, './src'),
   entry: {
     js: './index.js',
     vendor: ['react']
@@ -26,25 +28,38 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loaders: [
+        use: [
           'style',
-          'css'
+          {
+            loader: 'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+            options: { importLoaders: 1 }
+          },
+          {
+            loader: 'postcss',
+            options: {
+              plugins() {
+                return [
+                  localByDefault,
+                  values
+                ];
+              }
+            }
+          }
         ]
       },
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
         loaders: [
-          // 'react-hot',
           'babel-loader'
         ]
       },
     ],
   },
   resolve: {
-    extensions: ['', '.js', '.jsx'],
+    extensions: ['.js', '.jsx'],
     modules: [
-      path.resolve('./client'),
+      path.resolve(__dirname, './src'),
       'node_modules'
     ]
   },
@@ -69,10 +84,11 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
-    })
+    }),
+    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
-    contentBase: './client'
-    // hot: true
+    contentBase: './src',
+    hot: true
   }
 };
