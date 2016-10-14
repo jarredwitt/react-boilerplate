@@ -1,15 +1,14 @@
-# Budgeting - React + Redux Sample App
-
-Sample app demonstrating the power and simplicity of React, Redux, and Webpack 2. Includes tree shaking configuration. 
-
-This is a Webpack 2 version of a previous [Budgeting App](https://github.com/ModusCreateOrg/budgeting-sample-app).
+# Webpack + Babel + React + React-Router + Redux
 
 ## Contains
 
-- [x] [Webpack 2](https://webpack.github.io)
-- [x] [React](https://facebook.github.io/react/)
-- [x] [Redux](https://github.com/rackt/redux)
-- [x] [Babel](https://babeljs.io/)
+- [x] Babel
+- [x] CSS Modules
+- [x] PostCSS
+- [x] React
+- [x] React Router
+- [x] Redux
+- [x] Webpack 2
 
 Make sure you have the latest node before using Webpack 2. Some depenencies my fail in older versions. 
 
