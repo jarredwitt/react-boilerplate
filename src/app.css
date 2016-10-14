@@ -1,3 +1,5 @@
+$black: rgba(0, 255, 0, .5);
+
 .main {
-  color: blue;
+  color: $black;
 }

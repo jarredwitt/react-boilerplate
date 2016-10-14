@@ -1,8 +1,8 @@
+
 require('shelljs/global');
 
-var cmdLine = './node_modules/.bin/webpack --progress';
-var environ = 'production';
-var command;
+var cmdLine = 'webpack-dev-server --history-api-fallback --progress --port 3000';
+var environ = 'development';
 
 if (process.platform === 'win32') {
   cmdLine = 'set NODE_ENV=' + environ + '&& ' + cmdLine;

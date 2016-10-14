@@ -1,21 +1,20 @@
 const webpack = require('webpack');
 const path = require('path');
-const values = require('postcss-modules-values');
-const localByDefault = require('postcss-modules-local-by-default');
+const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const nodeEnv = process.env.NODE_ENV || 'development';
 const isProd = nodeEnv === 'production';
 
 module.exports = {
-  devtool: isProd ? 'hidden-source-map' : 'cheap-eval-source-map',
+  devtool: 'cheap-eval-source-map',
   context: path.join(__dirname, './src'),
   entry: {
     js: './index.js',
     vendor: ['react']
   },
   output: {
-    path: path.join(__dirname, './static'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    path: path.join(__dirname, './static')
   },
   module: {
     loaders: [
@@ -31,19 +30,11 @@ module.exports = {
         use: [
           'style',
           {
-            loader: 'css?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
+            loader: 'css?modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
             options: { importLoaders: 1 }
           },
           {
-            loader: 'postcss',
-            options: {
-              plugins() {
-                return [
-                  localByDefault,
-                  values
-                ];
-              }
-            }
+            loader: 'postcss-loader'
           }
         ]
       },
@@ -71,7 +62,17 @@ module.exports = {
     }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
-      debug: false
+      debug: false,
+      options: {
+        postcss() {
+          return {
+            parser: require('postcss-scss'),
+            plugins: [
+              require('precss'),
+            ]
+          }
+        }
+      }
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -86,9 +87,21 @@ module.exports = {
       'process.env': { NODE_ENV: JSON.stringify(nodeEnv) }
     }),
     new webpack.HotModuleReplacementPlugin(),
+    new DashboardPlugin()
   ],
   devServer: {
     contentBase: './src',
-    hot: true
+    hot: true,
+    quite: false,
+    noInfo: false,
+    stats: {
+      assets: false,
+      colors: true,
+      version: false,
+      hash: false,
+      timings: false,
+      chunks: false,
+      chunkModules: false
+    }
   }
 };

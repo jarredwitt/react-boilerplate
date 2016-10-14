@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 
-import transactions from './transactions';
+const placeHolderReducer = (state = {}) => state;
 
 /**
  * Routing to be implemented
  */
 export default combineReducers({
-  transactions
+  placeHolderReducer,
 });
