@@ -1,13 +1,18 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter, Match } from 'react-router';
 
-import style from './app.css';
+import {
+  Home
+} from 'containers';
 
 class App extends Component {
   render() {
     return (
-      <div className={style.main}>
-        React boilerplate.
-      </div>
+      <BrowserRouter>
+        <div>
+          <Match exactly pattern="/" component={Home} />
+        </div>
+      </BrowserRouter>
     );
   }
 }

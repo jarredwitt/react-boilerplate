@@ -1,1 +1,1 @@
-// placeholder for folder.
+export Home from './Home';
