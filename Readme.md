@@ -1,5 +1,7 @@
 # Webpack + Babel + React + React-Router + Redux
 
+A blank slate for developing react applications. Has some opinions, not a lot, but some.
+
 ## Contains
 
 - [x] Babel
@@ -10,7 +12,7 @@
 - [x] Redux
 - [x] Webpack 2
 
-Make sure you have the latest node before using Webpack 2. Some depenencies my fail in older versions. 
+Make sure you have the latest node before using Webpack 2. Some depenencies my fail in older versions.
 
 ## Setup
 
@@ -23,6 +25,8 @@ $ npm install
 ```
 $ npm start
 ```
+
+open http://localhost:3000
 
 ## Build
 

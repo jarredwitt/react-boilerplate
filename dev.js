@@ -1,4 +1,3 @@
-
 require('shelljs/global');
 
 var cmdLine = 'webpack-dev-server --history-api-fallback --progress --port 3000';
