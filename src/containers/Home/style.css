@@ -1,5 +1,8 @@
 $black: rgba(0, 0, 0, 0.5);
+$margin: 10px;
+
 
 .main {
   color: $black;
+  margin-left: $margin / 2;
 }

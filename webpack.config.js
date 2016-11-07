@@ -31,7 +31,10 @@ module.exports = {
           'style',
           {
             loader: 'css?modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-            options: { importLoaders: 1 }
+            options: { importLoaders: 2 }
+          },
+          {
+            loader: 'sass-loader',
           },
           {
             loader: 'postcss-loader'
@@ -65,12 +68,7 @@ module.exports = {
       debug: false,
       options: {
         postcss() {
-          return {
-            parser: require('postcss-scss'),
-            plugins: [
-              require('precss'),
-            ]
-          }
+          return {}; // Any post-css options go here...
         }
       }
     }),
